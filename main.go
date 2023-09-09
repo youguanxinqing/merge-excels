@@ -64,7 +64,6 @@ func main() {
 	})
 
 	win.SetContent(container.NewVBox(
-		initTitle(),
 		initContent(),
 		showSelectedFolder,
 		selectBtn,
@@ -75,13 +74,9 @@ func main() {
 }
 
 func initMainWindow(myApp fyne.App) fyne.Window {
-	win := myApp.NewWindow("Hello")
+	win := myApp.NewWindow(mainTitleText)
 	win.Resize(fyne.NewSize(mainWindowHight, mainWindowWidth))
 	return win
-}
-
-func initTitle() *widget.Label {
-	return widget.NewLabel(mainTitleText)
 }
 
 func initContent() *widget.Label {
@@ -123,12 +118,18 @@ func mergeExcels(dir string) error {
 		}
 
 		for _, row := range xlFile.Sheets[0].Rows {
-			newSheet.Rows = append(newSheet.Rows, row)
+			newRow := newSheet.AddRow()
+			// 遍历每一列
+			for _, cell := range row.Cells {
+				newCell := newRow.AddCell()
+				newCell.Value = cell.Value
+			}
 		}
 	}
 
 	if err := newXlFile.Save("merged.xlsx"); err != nil {
 		return fmt.Errorf("merged err: %v", err)
 	}
+
 	return nil
 }
