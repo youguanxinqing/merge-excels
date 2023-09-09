@@ -19,7 +19,7 @@ const (
 	mainWindowWidth = 600
 
 	mainTitleText   = "Merge Excels"
-	mainContentText = "select folder where places excels you want to merge"
+	mainContentText = "select the folder where the Excel files you want to merge are located"
 )
 
 func main() {
