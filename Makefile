@@ -5,6 +5,7 @@ clean:
 	rm -rf ./MergeExcels
 	rm -rf ./main
 	rm -rf ./merged.xlsx
+	rm -rf ./*.exe
 
 
 build:
